@@ -85,8 +85,38 @@ doneTime().then(res => {
     console.log('花费', + endTime - startTime + 'ms')
 })
 
-setTimeout(() => {
-    alert('hello')
-}, 0)
+// setTimeout(() => {
+//     alert('hello')
+// }, 0)
 
-alert('world')
+// alert('world')
+console.log(navigator)
+console.log(document.querySelector('div'), 'div1')
+let fdiv = document.querySelector('div')
+let alldiv = document.querySelectorAll('div')
+console.log(alldiv, 'alldiv')
+let pp = document.querySelector('.pp')
+console.log(pp, 'ppp')
+let ppid = document.querySelector('#ppid')
+console.log(ppid, 'ppid')
+let cp = document.createElement('p')
+cp.textContent = 'this is textContent'
+fdiv.appendChild(cp)
+console.log(fdiv.textContent, 'fdiv textContext')
+console.log(fdiv.innerText, 'fdiv innerText')
+
+// textContent  返回的是元素的所有文本内容  设置textContent不会触发回流 性能高
+// innerText 返回的是给人看的内容  设置会触发回流(受css影响)
+
+let textNode = document.querySelector('.textNode')
+// 创建文本节点
+let text = document.createTextNode('这是使用创建的文本节点的方法createTextNode创建的')
+textNode.appendChild(text)
+
+// 删除节点
+fdiv.removeChild(cp)
+// 删除自己
+fdiv.parentNode.removeChild(fdiv)
+
+// textNode.style.color = 'green'
+textNode.setAttribute('class', 'textNodeTest')

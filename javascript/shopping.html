@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+      input:active {
+          color: green;
+      }
+      input:focus {
+          color: green;
+          outline: none;
+          border: 1px solid green;
+          background-color: rgb(219, 98, 68);
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        window.onload = function() {
+            let labelEle = document.querySelector('label')
+            let inputValue = document.querySelector('input')
+            let buttn = document.querySelector('button')
+            let ulEle = document.querySelector('ul')
+            labelEle.focus()
+            inputValue.focus()
+            buttn.addEventListener('click', function(e) {
+                e.preventDefault()
+                let liEle = document.createElement('li')
+                liEle.textContent = inputValue.value
+                let but = document.createElement('button')
+                but.textContent = 'Delete'
+                but.style.color = '#000'
+                liEle.appendChild(but)
+                ulEle.appendChild(liEle)
+                inputValue.value = ''
+                inputValue.focus()
+                but.onclick = function(e) {
+                    but.parentNode.parentNode.removeChild(liEle)
+                }
+            })
+        }
+    </script>
+  </body>
+</html>
