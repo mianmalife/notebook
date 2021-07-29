@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>payment page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 10px auto;
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        p {
+            padding: 10px 0;
+        }
+        ul {
+            margin-left: 20px;
+            list-style: none;
+        }
+        fieldset {
+            width: 240px;
+            margin-top: 20px;
+            margin-left: 140px;
+            border: 1px solid #666;
+        }
+        input[type=radio] {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<form action="#" class="container">
+    <h2>payment form</h2>
+    <p>Required fields are followed by<abbr title="required">*</abbr></p>
+    <h2>Contact information</h2>
+    <section>
+        <fieldset>
+            <legend>Title</legend>
+            <ul>
+                <li>
+                    <label for="r1">
+                        <input type="radio" id="r1" name="tilte">apple
+                    </label>
+                </li>
+                <li>
+                    <label for="r2">
+                        <input type="radio" id="r2" name="tilte">apple1
+                    </label>
+                </li>
+                <li>
+                    <label for="r3">
+                        <input type="radio" id="r3" name="tilte">apple2
+                    </label>
+                </li>
+            </ul>
+        </fieldset>
+    </section>
+    <section>
+        <p>
+            <label for="username">姓名：</label>
+            <input type="text" name="username" id="username">
+        </p>
+    </section>
+</form>
+</body>
+</html>
