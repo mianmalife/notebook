@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uniersal property</title>
+    <style>
+        .container {
+            margin: 0 auto;
+            width: 600px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>
+            <input type="text" autofocus value="autofocus">
+        </p>
+        <p>
+            <input type="text" disabled>
+        </p>
+        <form action="#" method="POST">
+            <p>
+                <input type="email" placeholder="请输入邮箱地址" name="email" autocomplete="off" multiple>
+            </p>
+            <p>
+                <input type="password" placeholder="请输入密码" name="pass" autocomplete="off">
+            </p>
+            <p>
+                <input type="search" placeholder="搜索" name="search">
+            </p>
+            <p>
+                <input type="tel" placeholder="电话" name="tel">
+            </p>
+            <p>
+                <input type="url" placeholder="url" name="url">
+            </p>
+            <p>
+                <textarea name="txt" id="txt" cols="30" rows="10" wrap="hard"></textarea>
+            </p>
+            <P>
+                <select name="sel" id="sel">
+                    <option value="1">擎天柱</option>
+                    <option value="2" selected>威震天</option>
+                    <option value="3">擎天圣</option>
+                </select>
+            </P>
+            <p>
+                <select name="sel2" id="sel2" multiple>
+                    <option value="1">Best War</option>
+                    <option value="2">Transfomers</option>
+                    <option value="3">Dark prime</option>
+                </select>
+            </p>
+            <p>
+                <select name="sel3" id="sel3">
+                    <optgroup label="角色">
+                        <option value="1">擎天柱</option>
+                        <option value="2">威震天</option>
+                        <option value="3">擎天圣</option>
+                    </optgroup>
+                    <optgroup label="片名">
+                        <option value="1">Best War</option>
+                        <option value="2">Transfomers</option>
+                        <option value="3">Dark prime</option>
+                    </optgroup>
+                </select>
+            </p>
+            <p>
+                <input type="text" list="suggest" name="list" list="suggest">
+                <datalist id="suggest">
+                    <option>擎天柱</option>
+                    <option>威震天</option>
+                    <option>擎天圣</option>
+                    <option>Best War</option>
+                    <option>Transfomers</option>
+                    <option>Dark prime</option>
+                </datalist>
+            </p>
+            <p>
+                <fieldset>
+                    <legend>这是一组单选按钮</legend>
+                    <ul>
+                        <li>
+                            <label for="r1">
+                                <input type="radio" name="r1" id="r1">大黄蜂
+                            </label>
+                        </li>
+                        <li>
+                            <label for="r2">
+                                <input type="radio" name="r1" id="r2">铁皮
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </p>
+            <p>
+                <fieldset>
+                    <legend>这是一组多选按钮</legend>
+                    <ul>
+                        <li>
+                            <label for="r3">
+                                <input type="checkbox" name="r2" id="r3">极限1
+                            </label>
+                        </li>
+                        <li>
+                            <label for="r4">
+                                <input type="checkbox" name="r2" id="r4">极限2
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </p>
+            <p>
+                <input style="width: 200px;" type="number" placeholder="请输入数字" name="num" max="13" min="1" step="3">
+            </p>
+            <p>
+                <input type="range" value="1" name="range" max="300" min="1" step="2" class="rangeinput">
+                <span class="rangetext"></span>
+            </p>
+            <p>
+                <input type="week" name="week" id="week">
+            </p>
+            <p>
+                <input type="month" name="month">
+            </p>
+            <p>
+                <input type="time" name="time">
+            </p>
+            <p>
+                <input type="datetime-local" class="locals">
+            </p>
+            <p>
+                <input type="color">
+            </p>
+            <p>
+                <input type="file" name="files" id="file">
+            </p>
+            <p>
+                <input type="image" src="../javascript/xhr/wallhaven-g75r7d.jpg" width="200" height="100">
+            </p>
+            <p>
+                <progress max="100" value="70"></progress>
+            </p>
+            <p>
+                <meter min="0" max="100" value="75" low="33" high="66" optimum="50">75</meter>
+            </p>
+            <p>
+                <input type="submit" value="提交">
+            </p>
+        </form>
+    </div>
+    <script>
+        window.onload = function() {
+            let range = document.querySelector('.rangeinput')
+            let rangetxt = document.querySelector('.rangetext')
+            let localTime = document.querySelector('.locals')
+            range.oninput = function () {
+                rangetxt.textContent = range.value
+            }
+            localTime.oninput = function() {
+                console.log(localTime.value)
+            }
+        }
+    </script>
+</body>
+</html>
