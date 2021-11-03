@@ -154,3 +154,102 @@ const isReservedProp = /*#__PURE__*/ makeMap(
   'onVnodeBeforeUnmount,onVnodeUnmounted', true);
 
 console.log(isReservedProp('REF'), 'isRes')
+
+// 缓存函数
+const cacheStringFunction$1 = (fn) => {
+  const cache = Object.create(null);
+  return ((str) => {
+      const hit = cache[str];
+      return hit || (cache[str] = fn(str));
+  });
+};
+
+function testFn(str) {
+  return str.toUpperCase()
+}
+console.log(cacheStringFunction$1(testFn)('my love'), 'cache function')
+// \w 指 0-9a-zA-Z_ 数字字母下划线
+// () 指分组捕获
+// 匹配连字符 - 转驼峰
+const camelizeRE = /-(\w)/g;
+
+const camelize = cacheStringFunction$1((str) => {
+  console.log(str, 'str')
+    return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
+});
+console.log(camelize('on-hands')) // onHands
+
+const hyphenateRE$1 = /\B([A-Z])/g;
+
+const hyphenate$1 = cacheStringFunction$1((str) => str.replace(hyphenateRE$1, '-$1').toLowerCase());
+
+console.log(hyphenate$1('onClick')) // on-click
+
+// 首字母转大写
+const capitalize = cacheStringFunction$1((str) => str.charAt(0).toUpperCase() + str.slice(1));
+
+console.log(capitalize('onChange')) // OnChange
+
+// compare whether a value has changed, accounting for NaN.
+// 判断值是不是已经改变了，考虑NaN
+const hasChanged = (value, oldValue) => !Object.is(value, oldValue);
+
+console.log(hasChanged({}, {})) // true
+
+// Object.is 判断两个值是不是相等
+
+console.log(Object.is(+0, -0)) // false
+console.log(Object.is(NaN, NaN)) // true
+console.log(Object.is(2, 2)) // true
+console.log(NaN === NaN) // false
+
+const invokeArrayFns = (fns, arg) => {
+  for (let i = 0; i < fns.length; i++) {
+      fns[i](arg);
+  }
+};
+
+const fnArr = [
+  function(val) {
+    console.log(val.toUpperCase())
+  },
+  function(val) {
+    console.log(val.toLowerCase())
+  },
+  function(val) {
+    console.log(val)
+  },
+]
+
+// 转换为数字
+const toNumber = (val) => {
+  const n = parseFloat(val);
+  return isNaN(n) ? val : n;
+};
+
+const toNumberNew = (val) => {
+  const n = parseFloat(val);
+  return Number.isNaN(n) ? val : n;
+};
+
+console.log(isNaN('a')) // true
+console.log(Number.isNaN('a')) // false
+invokeArrayFns(fnArr, 'my world')
+
+// 获取全局对象
+let _globalThis;
+const getGlobalThis = () => {
+  return (_globalThis ||
+    (_globalThis =
+      typeof globalThis !== 'undefined'
+        ? globalThis
+        : typeof self !== 'undefined'
+          ? self
+          : typeof window !== 'undefined'
+            ? window
+            : typeof global !== 'undefined'
+              ? global
+              : {}));
+};
+// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/globalThis
+console.log(getGlobalThis())
