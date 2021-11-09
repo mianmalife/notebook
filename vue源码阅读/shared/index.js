@@ -115,7 +115,6 @@ const toRawType = (value) => {
   // extract "RawType" from strings like "[object RawType]"
   return toTypeString$1(value).slice(8, -1);
 };
-
 console.log(toRawType([])) // Array
 
 // 判断是不是纯粹的对象
