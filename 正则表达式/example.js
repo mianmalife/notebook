@@ -76,3 +76,30 @@ console.log(PCZ.test('t')) // false
 
 // 任意字符表示法
 //  [\d\D] 或者 [\w\W] 或者 [\s\S] 或者 [^]
+
+
+// 量词
+
+// {m}   -> {m, m}  出现m次
+// {m,} 出现至少m次
+// ?  有或者没有
+// +  至少有一个
+// *  任意次
+
+// 贪婪匹配 尽可能多匹配
+console.log('12 123 1234 12345 123456'.match(/\d{2,5}/g))
+// [ '12', '123', '1234', '12345', '12345' ]
+
+// 惰性匹配 尽可能少匹配
+console.log('12 123 1234 123456'.match(/\d{2,5}?/g))
+// ['12', '12', '12', '34', '12', '34', '56']
+
+console.log('12 123 1234'.match(/\d+?/g))
+
+console.log('12 123 1234'.match(/\d*?/g))
+
+// 多选分支 任选其一
+console.log('goodboy goodgirl'.match(/goodboy|goodgirl/g))
+// [ 'goodboy', 'goodgirl' ]
+console.log('good goodMan'.match(/good|goodMan/g))
+// [ 'good', 'good' ]  -> 惰性的 匹配到good就不匹配了
