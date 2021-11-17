@@ -103,3 +103,51 @@ console.log('goodboy goodgirl'.match(/goodboy|goodgirl/g))
 // [ 'goodboy', 'goodgirl' ]
 console.log('good goodMan'.match(/good|goodMan/g))
 // [ 'good', 'good' ]  -> 惰性的 匹配到good就不匹配了
+
+// 匹配十六进制字符
+// 十六进制表示[0-9a-fA-F]
+const HexRegx = /#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})/g
+const hex = '#fff #f2f2f2 #333'
+console.log(hex.match(HexRegx))
+
+// 匹配时间 23:59
+
+const TIMEREGX = /^([01][0-9]|[2][0-3]):[0-5][0-9]$/g
+
+console.log(TIMEREGX.test('00:00')) // true
+console.log(TIMEREGX.test('22:00')) // false ?
+console.log('21:09'.match(TIMEREGX)) // [ '21:09' ]
+
+// 匹配 7:9 8:9
+
+const TIMEREGX_S = /^(0?[0-9]|1[0-9]|[2][0-3]):(0?[0-9]|[1-5][1-9])$/g
+
+console.log('8:9'.match(TIMEREGX_S)) // [ '8:9' ]
+
+// 匹配yyyy-mm-dd
+// 2021-11-17
+const date = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[0-1])$/
+
+console.log(date.test('2021-11-17'))  // true
+console.log(date.test('2022-01-31')) // true
+console.log(date.test('9022-12-31')) // true
+console.log(date.test('9022-22-31')) // false
+
+// D:\code\JavaScript正则表达式迷你书（1.1版）.pdf
+// D:\  [a-zA-Z]:\\   \要转义
+// code\  ([^\\:*<>|"?\r\n/]+\\)* ([^\\:*<>|"?\r\n/]+)?   不能包含特殊字符 文件名至少一个字符 可能多个文件夹 可能是文件 code
+const WIN = /^[a-zA-Z]:\\([^\\:*<>|"?\r\n/]+\\)*([^\\:*<>|"?\r\n/]+)?$/
+
+console.log(WIN.test('D:\\code\\JavaScript正则表达式迷你书（1.1版）.pdf '), 'win')
+
+// 匹配window系统操作系统路径
+// D:\code\JavaScript正则表达式迷你书（1.1版）.pdf
+// 1. D:\    [a-zA-Z]:\\   \要转义
+// 2. code\   ([^\\:*?"<>|\r\n/]+\\)*  可能多个文件夹 + 文件夹名至少一个字符
+// 3. JavaScript正则表达式迷你书（1.1版）.pdf ([^\\:*?<>|\r\n/]+)?  可能是文件 code
+const win = /^[a-zA-Z]:\\([^\\:*?"<>|\r\n/]+\\)*([^\\:*?"<>|\r\n/]+)?/
+
+console.log(win.test('D:\\code\\npm-package-some\\node_modules\\ansi-styles'), 'win2')
+
+// 至20行
+
