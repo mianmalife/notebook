@@ -149,5 +149,85 @@ const win = /^[a-zA-Z]:\\([^\\:*?"<>|\r\n/]+\\)*([^\\:*?"<>|\r\n/]+)?/
 
 console.log(win.test('D:\\code\\npm-package-some\\node_modules\\ansi-styles'), 'win2')
 
-// 至20行
+const ele = '<div id="main" class="wrapper"></div>'
+const ELE = /id=".*"/g
 
+// id="  .是通配符 也匹配" *又是贪婪的 所以有下面结果
+console.log(ele.match(ELE)) // [ 'id="main" class="wrapper"' ]
+
+const ELE_REGX = /id=".*?"/g // 效率低
+
+const ELE_REGX2 = /id="[^"]*"/
+console.log(ele.match(ELE_REGX)) // [ 'id="main"' ] // [ 'id="main"' ]
+
+// 匹配开头
+// ^(脱字符)匹配开头 在多行匹配中匹配开头
+// $(美元符号)匹配结尾 在多行匹配中匹配结尾
+
+console.log('hello'.replace(/^|$/g, '*')) // *hello*
+console.log('hello\nworld\n'.replace(/^|$/gm, '@'))
+// @hello@
+// @world@
+// @
+
+// \b 单词边界  也就是\w与\W之间的位置 或者\w与^之间的位置 或者\w与$之间的位置
+let world = 'hello world hello everyone!'
+let world2 = '[hello world]!world'
+console.log(world.replace(/\b/g,'#'))
+// #hello# #world# #hello# #everyone#!
+// 1.^与\w之间的位置
+// 2.\w与\W之间的位置
+// 3.\W与\w之间的位置
+// 4. ...
+// 5. ...
+// 8. \w与\W之间的位置
+console.log(world2.replace(/\b/g, '#'))
+// #hello# #world#!#world#
+
+// \B 非单词边界 与\b相反
+console.log(world2.replace(/\B/g, '#'))
+// let world2 = '[hello world]!world'
+// #[h#e#l#l#o w#o#r#l#d]#!w#o#r#l#d
+
+// (?=p) 正向先行断言
+// 匹配p前面的位置
+console.log('Uzi jakelove'.replace(/(?=j)|(?=i)/g, '&'))
+// Uz&i &jakelove
+
+// (?!p) 负向先行断言 正向先行断言的相反匹配
+
+console.log('Uzi jakelove'.replace(/(?!j)/g, '&'))
+// &U&z&i& j&a&k&e&l&o&v&e&
+
+// (?<=p) 和 (?<!p) ????
+// 不匹配任何东西的正则  /.^/
+
+console.log('122133456'.replace(/(?!^)(?=(\d{3})+$)/g, ','))
+// 122,133,456
+console.log('12213 34563 2342344'.replace(/(?!\b)(?=(\d{3})+\b)/g, ','))
+// 12,213 34,563 2,342,344
+
+// (?!\b)  不是\b前面的位置 其实就是\B
+console.log('231321 42343 434'.replace(/\B(?=(\d{3})+\b)/g, ','))
+// 231,321 42,343 434
+
+// 货币格式化
+// 2899
+function formatMoney(num) {
+  return num.toFixed(2).replace(/\B(?=(\d{3})+\b)/g, ',').replace(/^/, '$ ')
+}
+console.log(formatMoney(2899))
+
+const password = /^[0-9a-zA-Z]{6,12}$/g
+
+// 必须包含数字和小写字母
+const password2 = /(?=.*[0-9])(?=.*[a-z])^[0-9a-zA-Z]{6,12}$/g
+
+// 至少包含两种字符
+const passwordQ = /(?!^[0-9]{6,12}$)(?!^[a-z]{6,12}$)(?!^[A-Z]{6,12}$)^[a-zA-Z0-9]{6,12}$/g
+
+console.log(passwordQ.test('1234567')) // false
+console.log(passwordQ.test('1234w67')) // true
+console.log(passwordQ.test('wwwfdds')) // false
+console.log(passwordQ.test('EERVSDDDFD')) // false
+console.log(passwordQ.test('EERVSD2DFD')) // true
