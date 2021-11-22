@@ -231,3 +231,59 @@ console.log(passwordQ.test('1234w67')) // true
 console.log(passwordQ.test('wwwfdds')) // false
 console.log(passwordQ.test('EERVSDDDFD')) // false
 console.log(passwordQ.test('EERVSD2DFD')) // true
+
+// 括号
+// 1.分组 2.子表达式 3.引用 4.反向引用 5.提取数据
+// 分支结构..
+const fzstr = 'hello world hello javascript'
+console.log(fzstr.match(/hello world|javascript/g)) // [ 'hello world', 'javascript' ]
+console.log(fzstr.match(/hello (world|javascript)/g)) // [ 'hello world', 'hello javascript' ]
+// 匹配yyyy-mm-dd
+const DateFReg = /(\d{4})-(\d{2})-(\d{2})/g // [ '2021-11-22' ]
+console.log('2021-11-22'.match(DateFReg))
+// console.log(DateFReg.exec('2021-11-22'))
+// [
+//   '2021-11-22',
+//   '2021',
+//   '11',
+//   '22',
+//   index: 0,
+//   input: '2021-11-22',
+//   groups: undefined
+// ]
+DateFReg.test('2021-11-22')
+console.log(RegExp.$1) // 2021
+console.log(RegExp.$2) // 11
+console.log(RegExp.$3) // 22
+console.log('2021-11-22'.replace(DateFReg, '$2/$3/$1')) // 11/22/2021
+// 同时匹配yyyy-mm-dd yyyy.mm.dd yyyy/mm/dd
+const allDate = /\d{4}(-|\/|\.)\d{2}(-|\/|\.)\d{2}/
+console.log(allDate.test('2021-11-22')) // true
+console.log(allDate.test('2021-11/22')) // true x
+// 反向引用 \1 \2 \3... \1 匹配第一个分组 \2 匹配第二个分组... 
+// \1表示引用之前的分组(这里下面是-的时候,\1下来仍会匹配-)
+const allDateYes = /\d{4}(-|\/|\.)\d{2}\1\d{2}/
+console.log(allDateYes.test('2021-11/22')) // false √
+// 括号嵌套 以左括号为准
+const testQt = /^((\d)(\d(\d)))\1\2\3\4$/
+//const testQt =/^((\d)(\d(\d)))\1\2\3\4$/
+console.log(testQt.test('1231231233'))
+console.log(RegExp.$1) // 123
+console.log(RegExp.$2) // 1
+console.log(RegExp.$3) // 23
+console.log(RegExp.$4) // 3
+// 如果真要匹配 \1 和 0 的话，请使用 (?:\1)0 或者 \1(?:0)
+// 分组+量词 分组匹配的是   最后一个字符
+const last = /(\d)+/
+console.log('123456'.match(last))
+// [ '123456', '6', index: 0, input: '123456', groups: undefined ] \d 最后一次匹配的数字是6
+const last1 = /(\d)+ \1/
+console.log(last1.test('123456 1')) // false
+console.log(last1.test('123456 6')) // true
+
+// 非捕获括号 括号最原始功能 不捕获 不反向引用
+const fbx = /(?:ab)+/g
+console.log('abac ababab acabab'.match(fbx)) // [ 'ab', 'ababab', 'abab' ]
+const fbf = /hello (?:world|javascript)/g
+console.log('hello world hello javascript'.match(fbf)) // [ 'hello world', 'hello javascript' ]
+// 39
