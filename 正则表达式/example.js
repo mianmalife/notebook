@@ -158,7 +158,7 @@ console.log(ele.match(ELE)) // [ 'id="main" class="wrapper"' ]
 const ELE_REGX = /id=".*?"/g // 效率低
 
 const ELE_REGX2 = /id="[^"]*"/
-console.log(ele.match(ELE_REGX)) // [ 'id="main"' ] // [ 'id="main"' ]
+console.log(ele.match(ELE_REGX)) // [ 'id="main"' ]
 
 // 匹配开头
 // ^(脱字符)匹配开头 在多行匹配中匹配开头
@@ -286,4 +286,62 @@ const fbx = /(?:ab)+/g
 console.log('abac ababab acabab'.match(fbx)) // [ 'ab', 'ababab', 'abab' ]
 const fbf = /hello (?:world|javascript)/g
 console.log('hello world hello javascript'.match(fbf)) // [ 'hello world', 'hello javascript' ]
-// 39
+
+// 字符串trim方法模拟
+function trims(str) {
+  return str.replace(/^\s+|\s+$/g, '')
+}
+console.log(trims('  2hello  ')) // 2hello
+
+function mTrim(str) {
+  return str.replace(/^\s*(.*?)\s*$/g, '$1')
+}
+console.log(mTrim('   4hello3  ')) // 4hello3
+console.log(' hell o  w '.replace(/\s/g, '')) // hellow
+
+// 将每个单词的首字母转换为大写
+// ?: 非捕获匹配 这里不使用也可以
+const pstr = 'i am chinese man'
+const toUpperCaseFunc = str => {
+  return str.toLowerCase().replace(/(?:^|\b)\w/g, (s) => {
+    return s.toUpperCase()
+  })
+}
+console.log(toUpperCaseFunc(pstr)) // I Am Chinese Man
+// 驼峰化
+// -webkit-transform
+// WebkitTransform
+const TFfunc = str => {
+  return str.replace(/[-_\s]+(.)?/g, (match, s)=> {
+    console.log(s)
+    return s ? s.toUpperCase() : ''
+  })
+}
+console.log(TFfunc('-webkit-transform')) // WebkitTransform
+// 驼峰化的逆过程
+const Revert = str => {
+  return str.replace(/([A-Z])/g, '-$1').replace(/[-_\s]+/g, '-').toLowerCase()
+}
+console.log(Revert('WebkitTransform')) // -webkit-transform
+// 匹配成对html标签
+const HTML_REG = /<([^>]+)>[\d\D]*<\/\1>/g
+console.log(HTML_REG.test('<div></div>')) // true
+console.log(HTML_REG.test('<div></p>')) // false
+
+console.log('abbbc'.match(/ab{1,3}bbc/g)) // [ 'abbbc' ]
+
+const test3 = /(\d{1,3}?)(\d{1,3})/
+console.log('12345'.match(test3)) 
+// [ '1234', '1', '234', index: 0, input: '12345', groups: undefined ]
+const test4 = /^\d{1,3}?\d{1,3}$/g
+console.log('12345'.match(test4)) // [ '12345' ]
+const test5 = /^(abc|def)$/g
+console.log('def'.match(test5)) // [ 'def' ]
+
+// 身份证
+const ID_CARD = /^(\d{15}|\d{17}[\dxX])$/
+// IPV4地址
+const ipv4 = /^((0{0,2}\d|0?\d{2}|1\d{2}|2[0-4]\d|25[0-5])\.){3}(0{0,2}\d|0?\d{2}|1\d{2}|2[0-4]\d|25[0-5])$/
+console.log(ipv4.test('192.168.141.17')) // true
+
+// | 优先级最低
