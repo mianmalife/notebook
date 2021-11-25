@@ -345,3 +345,82 @@ const ipv4 = /^((0{0,2}\d|0?\d{2}|1\d{2}|2[0-4]\d|25[0-5])\.){3}(0{0,2}\d|0?\d{2
 console.log(ipv4.test('192.168.141.17')) // true
 
 // | 优先级最低
+
+// 密码正则   6-12位 由数字，大小写字母组成 至少包含两种字符
+const passwordRegx = str => {
+  if (/^[0-9]{6,12}$/.test(str)) {
+    return false
+  }
+  if (/^[a-z]{6,12}$/.test(str)) {
+    return false
+  }
+  if (/^[A-Z]{6,12}$/.test(str)) {
+    return false
+  }
+  if (!/^[0-9A-Za-z]{6,12}$/.test(str)) {
+    return false
+  }
+  return true
+}
+
+console.log(passwordRegx('2222A223232')) // true
+
+// 匹配固定电话
+// 055188888888
+// 0551-88888888
+// (0551)88888888
+
+const phone = /^0\d{2,3}[1-9]\d{6,7}$|^0\d{2,3}-[1-9]\d{6,7}$|^\(0\d{2,3}\)[1-9]\d{6,7}$/
+console.log(phone.test('0551-88888888')) // true
+console.log(phone.test('(0551)88888888')) // true
+console.log(phone.test('055188888888')) // true
+
+const phone1 = /^1[3-9]\d{9}$/
+console.log(phone1.test(15591523289)) // true
+console.log(phone1.test(16291523289)) // true
+
+// 切分年月日
+console.log('2021/11/25'.split(/\D/)) // [ '2021', '11', '25' ]
+console.log('2021.11.25'.split(/\D/)) // [ '2021', '11', '25' ]
+console.log('2021-11-25'.split(/\D/)) // [ '2021', '11', '25' ]
+
+// 提取
+const dateTq = /^(\d{4})\D(\d{2})\D(\d{2})$/
+console.log('2021-11-25'.match(dateTq))
+// [
+//   '2021-11-25',
+//   '2021',
+//   '11',
+//   '25',
+//   index: 0,
+//   input: '2021-11-25',
+//   groups: undefined
+// ]
+console.log('2021-11-25'.search(dateTq)) // 0
+console.log(RegExp.$1, RegExp.$2, RegExp.$3) // 2021 11 25
+
+// search 和 match 字符串参数的问题 会把字符串转换为正则的 ?
+console.log('2021.11.25'.search('.')) // 0
+console.log('2021.11.25'.match('.')) 
+// [ '2', index: 0, input: '2021.11.25', groups: undefined ]
+// 修改为
+console.log('2021.11.25'.search(/\./)) // 4
+console.log('2021.11.25'.match(/\./))
+// [ '.', index: 4, input: '2021.11.25', groups: undefined ]
+
+// exec常和while配合
+const number = /\b(\d+)\b/g
+while(result = number.exec('2021-11-25')) {
+  console.log(result, number.lastIndex)
+}
+// [ '2021', '2021', index: 0, input: '2021-11-25', groups: undefined ] 4
+// [ '11', '11', index: 5, input: '2021-11-25', groups: undefined ] 7
+// [ '25', '25', index: 8, input: '2021-11-25', groups: undefined ] 10
+
+// split可以有第二个参数 表示数组的长度
+console.log('2021-11-23'.split(/-/, 2)) // [ '2021', '11' ]
+console.log('2021-11-23'.split('-', 2)) // [ '2021', '11' ]
+// 正则使用分组时数组包含分隔符
+console.log('2021-11-23'.split(/(-)/)) // [ '2021', '-', '11', '-', '23' ]
+console.log('2021,11,23'.split(/(,)/)) // [ '2021', ',', '11', ',', '23' ]
+// 74
