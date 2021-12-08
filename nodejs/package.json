@@ -1,0 +1,16 @@
+{
+  "name": "crete-new-file",
+  "version": "1.0.0",
+  "description": "create new file",
+  "main": "process.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node process.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "file-save": "^0.2.0",
+    "uppercamelcase": "^3.0.0"
+  }
+}
