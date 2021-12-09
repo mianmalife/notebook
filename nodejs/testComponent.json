@@ -1,0 +1,9 @@
+{
+  "test": "./page/test/index.js",
+  "page1": "./page/page1/index.js",
+  "page2": "./page/page2/index.js",
+  "page3": "./page/page3/index.js",
+  "page4": "./page/page4/index.js",
+  "page5": "./page/page5/index.js"
+}
+
