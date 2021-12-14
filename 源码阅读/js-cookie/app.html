@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="js.cookie.js"></script>
+  <script>
+    const api = Cookies.withAttributes({ expires: 1 })
+    api.set('test1', 'one')
+    api.set('test2', '你好')
+    api.set('test3', '地球你好🌏')
+    console.log(api.get('test1'))
+    console.log(api.attributes)
+  </script>
+  <!-- <script src="./assigns.js"></script> -->
+</body>
+
+</html>

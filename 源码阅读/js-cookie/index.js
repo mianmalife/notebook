@@ -1,0 +1,13 @@
+import Cookies from "js-cookie"
+Cookies.withAttributes({ expires: 1 })
+Cookies.set('testCookie', 'test-cookies123')
+Cookies.set('hello', 'hello world')
+Cookies.set('yeas', '年')
+Cookies.set('[haha]', '特殊')
+const coo = Cookies.get('testCookie')
+console.log(coo, '😜😊😂')
+console.log(typeof exports, typeof module)
+// const api = require('./assigns.js')
+// console.log(api.set('test', 'testvalue', { exprires: 2 }))
+// console.log(api.convert.write('testwrite'))
+// console.log(api.defaultProps)
