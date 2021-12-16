@@ -109,7 +109,7 @@
           }
         } catch (e) {}
       }
-
+      console.log(key ? jar[key] : jar)
       return key ? jar[key] : jar
     }
 
