@@ -9,15 +9,16 @@
 </head>
 
 <body>
+  <iframe src="./esmodule.html" frameborder="0" height="600px"></iframe>
   <script src="js.cookie.js"></script>
   <script>
-    const api = Cookies.withAttributes({ expires: 1 })
-    api.set('test1', 'one')
-    api.set('test2', '你好')
-    api.set('test3', '地球你好🌏')
+    const api = Cookies.withAttributes({})
+    api.set('test11', 'one')
+    api.set('test22', '你好')
+    api.set('test33', '地球你好🌏')
     // console.log(api.get('test1'))
     // console.log(api.attributes)
-    console.log(Cookies.get())
+    // console.log(Cookies.get())
   </script>
   <!-- <script src="./assigns.js"></script> -->
 </body>
