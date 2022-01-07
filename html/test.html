@@ -8,5 +8,13 @@
 </head>
 <body>
   <script src="../vue源码阅读/shared/index.js"></script>
+  <script>
+      Notification.requestPermission(function (status) {
+        console.log(status); // 仅当值为 "granted" 时显示通知
+        if (status === 'granted') {
+          var n = new Notification('hi'); // 显示通知
+        }
+      });
+  </script>
 </body>
 </html>
