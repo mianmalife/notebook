@@ -18,4 +18,4 @@ Promise.resolve(111)
   console.log('finally', res)
 })
 
-console.log('out')
+console.log('out') // 59
