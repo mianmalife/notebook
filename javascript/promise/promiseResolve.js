@@ -7,12 +7,17 @@
 // })
 
 const promise1 = new Promise((resolve, reject) => {
-  console.log('promise1')
   resolve(123)
+}).then(res => {
+  return res
 })
 
-promise1.then(res => {
-  console.log(res)
-})
+// promise1.then(res => {
+//   console.log(res)
+// })
 
-console.log('out')
+// console.log('out')
+
+Promise.resolve(promise1).then(res => {
+  console.log(res, '11')
+})
