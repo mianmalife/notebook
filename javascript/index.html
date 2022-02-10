@@ -22,9 +22,17 @@
     <p class="textNode"></p>
     <script src="./promise1.js"></script>
     <script src="./leecode/z字型变换.js"></script>
+    <!-- <script src="./testDebounce.js"></script> -->
+    <script src="./throttle.js"></script>
     <script>
         const test = convert('PAYPALISHIRING', 3)
         console.log(test)
+        window.addEventListener('resize', throttle(function(e) {
+            console.log(e)
+        }, 2000))
+        // window.addEventListener('resize', function(e) {
+        //     console.log(e)
+        // })
     </script>
 </body>
 
