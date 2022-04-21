@@ -1,7 +1,0 @@
-{
-  "test": "./page/test/index.js",
-  "my-test1": "./page/my-test1/index.js",
-  "my-test2": "./page/my-test2/index.js",
-  "my-test3": "./page/my-test3/index.js",
-  "my-test4": "./page/my-test4/index.js"
-}

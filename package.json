@@ -1,0 +1,9 @@
+{
+  "name": "purepractice",
+  "version": "1.0.0",
+  "description": "record something",
+  "main": "index.js",
+  "repository": "git@github.com:mianmalife/notebook.git",
+  "author": "zhangkx",
+  "license": "MIT"
+}
