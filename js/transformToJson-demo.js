@@ -1,4 +1,3 @@
-
 const nodes = [
   { id: 1, pId: 0, name: "父节点1 - 展开", open: true },
   { id: 11, pId: 1, name: "父节点11 - 折叠" },
@@ -30,52 +29,42 @@ const nodes = [
   { id: 234, pId: 23, name: "叶子节点234" },
   { id: 3, pId: 0, name: "父节点3 - 没有子节点", isParent: true }
 ]
-const simpleData = {
-  enable: false,
-  idKey: "id",
-  pIdKey: "pId",
-  rootPId: null
-}
-const nodeChildren = function (node, newChildren) {
+
+function nodeChildren(node, newChildren) {
   if (!node) {
-    return null;
+    return null
   }
+
   if (typeof newChildren !== 'undefined') {
-    node['children'] = newChildren;
+    node['children'] = newChildren
   }
-  return node['children'];
+
+  return node['children']
 }
 
-const transformTozTreeFormat = function (sNodes) {
-  var i, l,
-    key = simpleData.idKey,
-    parentKey = simpleData.pIdKey;
-  if (!key || key == "" || !sNodes) return [];
-
-  if (Array.isArray(sNodes)) {
-    var r = [];
-    var tmpMap = {};
-    for (i = 0, l = sNodes.length; i < l; i++) {
-      tmpMap[sNodes[i][key]] = sNodes[i];
-    }
-    for (i = 0, l = sNodes.length; i < l; i++) {
-      var p = tmpMap[sNodes[i][parentKey]];
-      if (p && sNodes[i][key] != sNodes[i][parentKey]) {
-        var children = nodeChildren(p);
-        if (!children) {
-          children = nodeChildren(p, []);
-        }
-        children.push(sNodes[i]);
-      } else {
-        r.push(sNodes[i]);
+function transformToJson(sNodes) {
+  const key = 'id';
+  const parentKey = 'pId'
+  const temple = {}
+  const r = []
+  for (let i = 0; i < sNodes.length; i++) {
+    temple[sNodes[i][key]] = sNodes[i] // 得到以节点id为key 节点为value的对象 { 1: { id: 1, pId: 0, name: "父节点1 - 展开", open: true }, 11: { id: 11, pId: 1, name: "父节点11 - 折叠" } }
+  }
+  for (let i = 0; i < sNodes.length; i++) {
+    // 获取父节点p, p如果为undefined说明没有找到父节点(p是根节点), 直接放数组r里存起来(63行)
+    const p = temple[sNodes[i][parentKey]]
+    // 找到sNode[i]的父节点p & sNode[i]的pId和Id不相等
+    if (p && sNodes[i][parentKey] !== sNodes[i][key]) {
+      let children = nodeChildren(p)
+      if (!children) {
+        children = nodeChildren(p, [])
       }
+      children.push(sNodes[i])
+    } else {
+      r.push(sNodes[i])
     }
-    return r;
-  } else {
-    return [sNodes];
   }
+  return r
 }
 
-const res = nodeChildren([], transformTozTreeFormat(nodes))
-console.log(res)
-console.log(transformTozTreeFormat(nodes))
+console.log(transformToJson(nodes))
