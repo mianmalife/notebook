@@ -126,3 +126,15 @@ var obj7 = {
 }
 
 console.log(obj7.fn())
+
+let lrc = 'hello let'
+
+let obj8  = {
+  lrc: 'hello obj8 lrc',
+  k: () => this.lrc,
+  getLrc: function() {
+    console.log(this.lrc, this)
+  }
+}
+obj8.getLrc() // hello obj8 lrc
+console.log(obj8.k()) // undefind
