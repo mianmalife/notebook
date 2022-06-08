@@ -29,6 +29,10 @@
 
 `git push origin dev`
 
+### 推送本地分支local到远端remote分支(remote不存在)
+
+`git push origin local:remote`
+
 ### 拉取远端分支
 
 `git pull`
