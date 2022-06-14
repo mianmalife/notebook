@@ -78,6 +78,7 @@
     ```
     XMLHttpRequest, Fetch API
     ```
+
 ### HTTP状态码
 - 信息响应(100~199)
 - 成功响应(200~299)
