@@ -74,12 +74,13 @@
     Content-Length: 29769
     Content-Type: text/html
    ```
-## 基于HTTP的APIs
-    ```
-    XMLHttpRequest, Fetch API
-    ```
 
-* HTTP状态码
+## 基于HTTP的APIs
+  ```
+  XMLHttpRequest, Fetch API
+  ```
+
+## HTTP状态码
 - 信息响应(100~199)
 - 成功响应(200~299)
 - 重定向消息(300~399)
