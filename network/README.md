@@ -48,8 +48,6 @@
     Content-Length: 29769
     Content-Type: text/html
 
-  <!DOCTYPE html... (here comes the 29769 bytes of the requested web page)
-
    ```
   4. 关闭连接或者为后续请求重用连接
    
