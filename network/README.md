@@ -103,3 +103,54 @@
   503: 服务没有准备好处理请求,比如服务器维护或停机
   504: 服务器充当网关响应超时
   ```
+## HTTP headers
+
+- 通用首部
+- 请求头
+- 响应头
+- 实体头
+
+## 跨域资源共享[CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS)
+- 基于HTTP请求头的机制
+- 服务器标示了除过它以外的域,允许浏览器访问自己的资源
+
+
+### 简单请求
+- GET
+- POST
+- HEAD(请求头部信息, 这些头部信息与GET请求返回的头部信息一致) 在一些大文件下载请求中 返回资源的大小信息,以决定是否下载
+
+### 处理简单的跨域请求
+
+服务端设置 `Access-Control-Allow-Origin: http://xxx...` 和客户端`Origin: http://xxx...`配合
+
+### 预检请求
+
+比如一个POST请求设置了自定义头和Content-Type
+
+浏览器发起OPTIONS请求 -> 服务端响应 -> 浏览器发起实际请求(比如POST) -> 服务端响应
+
+## HTTP响应首部字段
+
+   ```
+   // 服务端告诉客户端不同的域返回不同的内容
+   Access-Control-Allow-Origin: http://xxx
+   Vary: http://xxx
+
+   // 将服务端允许访问的头放入白名单
+   Access-Control-Expose-Headers: X-kaka-Headers X-hh-Headers
+
+   // 预检请求的结果缓存多久
+   Access-Control-Max-Age: 86400   // 24小时
+
+   // 设置预检请求的响应 允许实际请求的HTTP方法
+   Access-Control-Allow-Methods: GET, POST
+
+   ...
+
+   ```
+   
+
+
+
+
