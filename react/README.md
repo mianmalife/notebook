@@ -48,4 +48,150 @@
   - 性能要求高的应用无法极致优化
   
 
+##` React`生命周期
+
+`React`生命周期是`React`组件从创建->初始化数据->编译模板->挂载`DOM`-渲染,更新-渲染,卸载的过程
+
+  ```
+  // 挂载阶段
+  constructor()
+  static getDerivedStateFromProps()
+  render()
+  componentDidMount()
+
+  // 更新阶段
+  static getDerivedStateFromProps()
+  shouldComponentUpdate()
+  render()
+  getSnapshotBeforeUpdate()
+  componentDidUpdate()
+
+  // 卸载阶段
+  componentWillUnMount()
+
+  ```
+
+![生命周期图](./lifeCycle.png)
+
+##` React`中的`setState`的执行机制
+
+1. 异步更新
+2. 同步更换
+
+- 异步更新
+  ```
+  this.setState({
+    name: 'k'
+  }, () => {
+    console.log(this.state.name) // k
+  })
+  ```
+- 同步更新
+  ```
+  setTimeout(() => {
+    this.setState({
+      count: this.state.count + 1
+    })
+    console.log(this.state.count) // 2
+  }, 0)
+
+  document.getElementById('btn').addEventListener('click', () => {
+    this.setState({
+      count: this.state.count + 1
+    })
+    console.log(this.state.count) // 2
+  })
+  ```
+
+  - 在组件生命周期和`React`合成事件中, `setState`是异步
+  - 在`setTimeout`或原生事件中, `setState`是同步
+3. 批量更新
+   ```
+    this.setState({
+      count: this.state.count + 1
+    })
+    this.setState({
+      count: this.state.count + 1
+    })
+    this.setState({
+      count: this.state.count + 1
+    })
+   ``` 
+  后面的会覆盖前面的, 最终的到`count`打印是1 页面展示是2, `setState`传入一个函数解决覆盖的问题
+
+    ```
+    this.setState((prevState, props) => ({ count: prevState.count + 1 }))
+    this.setState((prevState, props) => ({ count: prevState.count + 1 }))
+    this.setState((prevState, props) => ({ count: prevState.count + 1 }))
+    ```
+
+## React事件机制
+
+- `React`事件机制是基于浏览器事件机制实现的一套机制->合成事件
+- `React`上注册的事件最终会绑定在`Document`上, 减少内存开销
+- 自身实现了一套事件冒泡机制
+- 有一套自己的合成事件
+  
+## React中构建组件的方式
+
+- 函数式创建
+- 继承`React.Component`
+- `React.createClass(createElement)`
+
+## React组件通讯
+
+- 父子 `props`
+- 子父 `this.props.callback`
+- 子子 通过父间接通讯
+- 父-多代 `context`
+- 非关系组件 `Redux`等
+  ```
+  // 父
+  const PRICE = React.createContext('k')
+  <PRICE.Provider value='haha'>
+  </PRICE.Provider>
+
+  // 后代
+  <PRICE.Consumer>
+  {
+    price => <div>{price}</div>
+  }
+  </PRICE.Consumer>
+
+  // 或者
+  static contextType = PRICE
+  render() {
+    let price = this.context
+    ...
+  }
+  ```
+
+  ## React中key的作用
+
+  - 用于判断元素是新创建还是被增删改的元素, 从而减少不必要的`Diff`
+  - 性能优化
+  - key是唯一的, key不要用随机数, 避免使用index作为key
+
+  ## React中refs的作用
+  - 访问DOM
+  - 访问组件实例
+  
+  1. 控制DOM元素焦点
+  2. 集成第三方DOM库
+  3. 控制视频媒体内容播放,元素内容设置
+
+  ## React高阶组件
+
+  接收一个或多个组件, 返回一个新组件
+
+  场景:
+  - 日志记录
+  - 数据校验
+  - 统计上报
+  - 权限控制
+  - ...
+  
+
+
+  
 
