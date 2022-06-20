@@ -190,6 +190,22 @@
   - 统计上报
   - 权限控制
   - ...
+
+## Redux
+
+  ```
+  const { createStore } from 'redux'
+
+  const reducer = (state, action) => {}
+
+  const store = createStore(reducer)
+
+  store.dispatch({})
+  
+  store.subscribe(() => {
+    store.getState()
+  })
+  ```
   
 
 
