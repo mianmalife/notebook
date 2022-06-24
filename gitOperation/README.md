@@ -14,7 +14,7 @@
 
 `git config --global user.email "zhangkexu@yunquna.com"`
 
-`git config --global user.name "zhangkexu"</code>`
+`git config --global user.name "zhangkexu"`
 
 
 ### 查看配置
