@@ -111,8 +111,11 @@
 ### 下载指定分支代码
 ```git clone -b 'feature/auto_filter_option' git@git.xxx:yundixxx-v2/frontend/xxx.git```
 
-### 查看分支地址
-``` git remote -v```
+### 查看远程分支地址
+```git remote -v```
+
+### 修改远程分支地址(仓库名修改了, 本地同步最新地址可以用)
+```git remote set-url origin xxx```
 
 ### 退出shell
 
