@@ -85,6 +85,10 @@
 `git stash clear`
 `git stash drop 'stash@{num}'`
 
+### 删除上次提交
+`git reset --hard HEAD^` // 上次提交是HEAD^ 上上次和HEAD^^ 依次类推 或者HEAD~2
+`git push origin XXX -f`
+
 ### 修改commit信息（最后一次提交的注释）
 
 `git commit --amend`
